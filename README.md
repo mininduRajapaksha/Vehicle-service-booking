@@ -1,2 +1,2 @@
 # Vehicle-service-booking
-Vehicle service booking with react native
+Vehicle service booking app with react native
