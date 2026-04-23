@@ -37,3 +37,10 @@ import ServiceItem from '../models/serviceItem.js';
     .then(ServiceItem => res.json(ServiceItem))
     .catch(err=> res.status(400).json("Error:"+ err));
  });
+
+ //delete item
+ router.route("/delete/:id").delete((req,res) =>{
+    ServiceItem.delete(req.params.id)
+    .then(() => res.json("Item Deleted"))
+    .catch(err => res.status(400).json("Error:" + err));
+ });
