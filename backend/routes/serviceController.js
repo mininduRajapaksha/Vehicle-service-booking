@@ -30,3 +30,19 @@ router.route("/get/:id").get(req,res =>{
     .then(service => res.json(service))
     .catch(err => res.status(400).json("Error: " + err));
 })
+
+//update a service
+router.route("/update/:id").put(req,res =>{
+    Service.findById(req.params.id)
+    .then(Service =>{
+        Service.serviceName = req.body.serviceName;
+        Service.description = req.body.description;
+        Service.price = req.body.price;
+        Service.duration = req.body.duration;
+
+        Service.save().then(()=>{
+            res.json("Service Updated")
+        }).catch(err => res.status(400).json("Error: " + err));
+    })
+    .catch(err => res.status(400).json("Error: " + err));
+});
