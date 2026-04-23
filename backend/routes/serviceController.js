@@ -40,9 +40,18 @@ router.route("/update/:id").put(req,res =>{
         Service.price = req.body.price;
         Service.duration = req.body.duration;
 
-        Service.save().then(()=>{
-            res.json("Service Updated")
+        Service.save()
+        .then(()=>{res.json("Service Updated")
         }).catch(err => res.status(400).json("Error: " + err));
     })
     .catch(err => res.status(400).json("Error: " + err));
 });
+
+//delete a service
+router.route("delete/:id").delete(req,res =>{
+    Service.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Service Deleted"))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+module.exports = router;
