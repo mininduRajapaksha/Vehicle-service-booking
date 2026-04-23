@@ -24,6 +24,13 @@ import ServiceItem from '../models/serviceItem.js';
 
  })
 
+ //get all item
+ router.route("/get").get((req,res) =>{
+    ServiceItem.find()
+    .then(ServiceItem => res.json(ServiceItem))
+    .catch(err =>res.status(400).json("Error:"+ err));
+ });
+
  //get one item
  router.route("get/:id").get((req,res) =>{
     ServiceItem.findById(req.params.id)
