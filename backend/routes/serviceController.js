@@ -22,3 +22,11 @@ router.route("/").get(req,res =>{
     .then(services => res.json(services))
     .catch(err => res.status(400).json("Error: " + err));
 });
+
+//get one service
+
+router.route("/get/:id").get(req,res =>{
+    Service.findById(req.params.id)
+    .then(service => res.json(service))
+    .catch(err => res.status(400).json("Error: " + err));
+})
