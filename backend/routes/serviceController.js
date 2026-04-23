@@ -16,3 +16,9 @@ router.route("/add").post(req,res =>{
     }).catch(err => res.status(400).json("Error: " + err));
 });
 
+//Get all services
+router.route("/").get(req,res =>{
+    Service.find()
+    .then(services => res.json(services))
+    .catch(err => res.status(400).json("Error: " + err));
+});
