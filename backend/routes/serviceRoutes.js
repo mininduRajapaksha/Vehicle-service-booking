@@ -1,4 +1,5 @@
-const router = require("express").Router();
+import express from "express";
+const router = express.Router();
 import Service from "../models/service.js";
 
 // Create a new service
@@ -34,13 +35,13 @@ router.route("/get/:id").get(req,res =>{
 //update a service
 router.route("/update/:id").put(req,res =>{
     Service.findById(req.params.id)
-    .then(Service =>{
-        Service.serviceName = req.body.serviceName;
-        Service.description = req.body.description;
-        Service.price = req.body.price;
-        Service.duration = req.body.duration;
+    .then(service =>{
+        service.serviceName = req.body.serviceName;
+        service.description = req.body.description;
+        service.price = req.body.price;
+        service.duration = req.body.duration;
 
-        Service.save()
+        service.save()
         .then(()=>{res.json("Service Updated")
         }).catch(err => res.status(400).json("Error: " + err));
     })
@@ -48,7 +49,7 @@ router.route("/update/:id").put(req,res =>{
 });
 
 //delete a service
-router.route("delete/:id").delete(req,res =>{
+router.route("/delete/:id").delete(req,res =>{
     Service.findByIdAndDelete(req.params.id)
     .then(() => res.json("Service Deleted"))
     .catch(err => res.status(400).json("Error: " + err));
