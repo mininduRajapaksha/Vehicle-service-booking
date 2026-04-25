@@ -3,7 +3,7 @@ const router = express.Router();
 import ServiceItem from '../models/serviceItem.js';
 
 // Create a new item
- router.route("/add").post(req,res =>{
+ router.route("/add").post((req,res) =>{
     const {name, description, price, category} = req.body;
 
     const newServiceItem = new ServiceItem({
@@ -26,14 +26,14 @@ import ServiceItem from '../models/serviceItem.js';
  })
 
  //get all item
- router.route("/get").get((req,res) =>{
+ router.route("/").get((req,res) =>{
     ServiceItem.find()
     .then(serviceItem => res.json(serviceItem))
     .catch(err =>res.status(400).json("Error:"+ err));
  });
 
  //get one item
- router.route("/get/:id").get((req,res) =>{
+ router.route("/:id").get((req,res) =>{
     ServiceItem.findById(req.params.id)
     .then(serviceItem => res.json(serviceItem))
     .catch(err=> res.status(400).json("Error:"+ err));
@@ -46,4 +46,4 @@ import ServiceItem from '../models/serviceItem.js';
     .catch(err => res.status(400).json("Error:" + err));
  });
 
- module.exports = router;
+ export default router;
