@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Alert, TextInput, View, Button, Text } from "react-native";
-import API from "./Services/api";
+import API from "../Services/api";
 
 
 
@@ -48,13 +48,14 @@ export default function AddServices() {
                 placeholder="Service Name"
                 value={serviceName}
                 onChangeText={setServiceName}
-                
+                style={{borderWidth: 1, borderColor: "#ccc", padding: 10, marginVertical: 10}}
             />
 
             <TextInput
                 placeholder="Description"
                 value={description}
                 onChangeText={setDescription}
+                style={{borderWidth: 1, borderColor: "#ccc", padding: 10, marginVertical: 10}}
             />
 
             <TextInput
@@ -62,12 +63,14 @@ export default function AddServices() {
                 value={price}
                 onChangeText={setPrice}
                 keyboardType="numeric"
+                style={{borderWidth: 1, borderColor: "#ccc", padding: 10, marginVertical: 10}}
             />
 
             <TextInput
                 placeholder="Duration"
                 value={duration}
                 onChangeText={setDuration}
+                style={{borderWidth: 1, borderColor: "#ccc", padding: 10, marginVertical: 10}}
             />
 
             <Button title="Add Service" onPress={handleSubmit} />

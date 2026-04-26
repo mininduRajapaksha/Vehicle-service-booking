@@ -1,6 +1,6 @@
 import { View, Text, FlatList } from "react-native";
 import { useEffect, useState } from "react";
-import API from "./Services/api";
+import API from "../Services/api";
 
 export default function ServicesScreen() {
   const [services, setServices] = useState<any[]>([]);
