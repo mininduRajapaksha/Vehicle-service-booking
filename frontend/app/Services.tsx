@@ -23,7 +23,7 @@ export default function ServicesScreen() {
         renderItem={({ item }) => (
           <View style={{ marginVertical: 10 }}>
             <Text>{item.serviceName}</Text>
-            <Text>Rs. {item.price}</Text>
+            <Text>{item.description}</Text>
           </View>
         )}
       />
