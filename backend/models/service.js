@@ -18,7 +18,10 @@ const serviceSchema = new mongoose.Schema({
     createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+    Image:{
+    type: String,
+    }
 });
 
 const Service = mongoose.model('Service', serviceSchema);
