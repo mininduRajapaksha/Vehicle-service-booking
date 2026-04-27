@@ -24,7 +24,9 @@ connection.once("open",()=>{
 
 import serviceRoutes from "./routes/serviceRoutes.js";
 import serviceItemRoutes from "./routes/ServiceItemsRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
+app.use("/auth", authRoutes);
 app.use("/services", serviceRoutes);
 app.use("/items", serviceItemRoutes);
 app.use("/uploads", express.static("uploads"));
