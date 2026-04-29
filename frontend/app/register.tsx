@@ -1,5 +1,6 @@
+import { router } from "expo-router";
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -7,6 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [telPhone, setTelPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [errors, setErrors] = useState<any>({});
 
@@ -35,6 +37,12 @@ export default function Register() {
       newErrors.password = "Min 6 characters";
     }
 
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Confirm password required";
+    } else if (confirmPassword !== password) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -51,7 +59,7 @@ export default function Register() {
           lastName,
           email,
           telPhone,
-          password
+          password,
         })
       });
 
@@ -128,7 +136,23 @@ export default function Register() {
       />
       {errors.password && <Text style={styles.error}>{errors.password}</Text>}
 
-      <Button title="Register" onPress={handleRegister} />
+      <TextInput
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={(text) => {
+          setConfirmPassword(text);
+          validate();
+        }}
+        secureTextEntry
+        style={styles.input}
+      />
+      {errors.confirmPassword && <Text style={styles.error}>{errors.confirmPassword}</Text>}
+
+      <Button title="Sign Up" onPress={handleRegister} />
+
+      <TouchableOpacity onPress={() => router.push("/login")}>
+          <Text>Already have an account? Login</Text>
+        </TouchableOpacity>
     </View>
   );
 }
