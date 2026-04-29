@@ -12,15 +12,6 @@ export default function Home() {
         Vehicle Service Booking
       </Text>
 
-      {screen === "login" ? <Login /> : <Register />}
-
-      <Button
-        title="Switch Screen"
-        onPress={() =>
-          setScreen(screen === "login" ? "register" : "login")
-        }
-      />
-
     </View>
   );
 }
