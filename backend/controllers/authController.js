@@ -72,3 +72,32 @@ export const login = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// update user
+export const updateProfile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const { firstName, lastName, telPhone } = req.body;
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { firstName, lastName, telPhone },
+            { new: true }
+        );
+
+        res.status(200).json({
+            message: "Profile updated",
+            user: {
+                firstName: updatedUser.firstName,
+                lastName: updatedUser.lastName,
+                email: updatedUser.email,
+                telPhone: updatedUser.telPhone,
+                role: updatedUser.role
+            }
+        });
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
