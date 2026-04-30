@@ -56,7 +56,7 @@ export default function Profile() {
       <Text style={styles.title}>Profile</Text>
 
       <View style={styles.card}>
-        <Text style={styles.label}>Name</Text>
+        <Text style={styles.label}>Full Name</Text>
         <Text style={styles.value}>
           {user.firstName} {user.lastName}
         </Text>
@@ -71,19 +71,17 @@ export default function Profile() {
         <Text style={styles.value}>{user.role}</Text>
       </View>
 
+      <TouchableOpacity
+        style={styles.editButton} onPress={() => router.push("/EditProfile")}>
+        <Text style={styles.editText}>
+          Edit Profile
+        </Text>
+      </TouchableOpacity>
+
       {/* Logout */}
       <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity
-  style={{ marginTop: 20 }}
-  onPress={() => router.push("/EditProfile")}
->
-  <Text style={{ color: "#2196F3", fontWeight: "bold" }}>
-    Edit Profile
-  </Text>
-</TouchableOpacity>
 
     </View>
   );
@@ -120,16 +118,32 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 
+  editButton:{
+    backgroundColor: "#04b819",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop:10
+  },
+
+  editText:{
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize:15
+  },
+
   logoutBtn: {
     backgroundColor: "#e53935",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
+    marginTop:10
   },
 
   logoutText: {
     color: "#fff",
     fontWeight: "bold",
+    fontSize:15
   },
 });
 
