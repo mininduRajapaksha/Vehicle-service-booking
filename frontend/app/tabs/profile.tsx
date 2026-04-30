@@ -59,6 +59,15 @@ export default function Profile() {
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity
+  style={{ marginTop: 20 }}
+  onPress={() => router.push("/EditProfile")}
+>
+  <Text style={{ color: "#2196F3", fontWeight: "bold" }}>
+    Edit Profile
+  </Text>
+</TouchableOpacity>
+
     </View>
   );
 }
