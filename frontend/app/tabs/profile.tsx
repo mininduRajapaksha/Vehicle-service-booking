@@ -42,6 +42,51 @@ export default function Profile() {
   );
 };
 
+const handleDeleteAccount = () => {
+  Alert.alert(
+    "Delete Account",
+    "Do you really want to delete your account?",
+    [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: async () => {
+          try {
+            const token = await AsyncStorage.getItem("token");
+
+            const res = await fetch(
+              "http://192.168.1.3:5000/auth/delete",
+              {
+                method: "DELETE",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+
+            if (res.ok) {
+              await AsyncStorage.clear();
+
+              Alert.alert("Deleted", "Your account has been deleted");
+
+              router.replace("/(publicTabs)");
+            } else {
+              const data = await res.json();
+              Alert.alert("Error", data.message);
+            }
+          } catch (err) {
+            Alert.alert("Error", "Failed to delete account");
+          }
+        },
+      },
+    ]
+  );
+};
+
   if (!user) {
     return (
       <View style={styles.container}>
@@ -81,6 +126,13 @@ export default function Profile() {
       {/* Logout */}
       <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.deleteBtn}
+          onPress={handleDeleteAccount}
+>
+        <Text style={styles.deleteText}>Delete Account</Text>
       </TouchableOpacity>
 
     </View>
@@ -145,8 +197,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize:15
   },
+
+  deleteBtn: {
+  backgroundColor: "#000",
+  padding: 15,
+  borderRadius: 10,
+  alignItems: "center",
+  marginTop: 10,
+  },
+
+  deleteText: {
+  color: "#fff",
+  fontWeight: "bold",
+  fontSize: 15,
+  },
 });
 
-function setLoading(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
