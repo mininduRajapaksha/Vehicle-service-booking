@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
@@ -20,10 +20,27 @@ export default function Profile() {
     }
   };
 
-  const handleLogout = async () => {
-    await AsyncStorage.clear();
-    router.replace("/(publicTabs)");
-  };
+
+  const handleLogout = () => {
+  Alert.alert(
+    "Logout",
+    "Are you sure you want to log out?",
+    [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Logout",
+        style: "destructive",
+        onPress: async () => {
+          await AsyncStorage.clear();
+          router.replace("/(publicTabs)");
+        },
+      },
+    ]
+  );
+};
 
   if (!user) {
     return (
@@ -115,3 +132,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+function setLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
