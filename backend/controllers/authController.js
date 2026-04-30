@@ -101,3 +101,16 @@ export const updateProfile = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+//delete user
+export const deleteAccount = async (req, res) => {
+  try {
+    const userId = req.userId.id;
+
+    await User.findByIdAndDelete(userId);
+
+    res.status(200).json({ message: "Account deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
