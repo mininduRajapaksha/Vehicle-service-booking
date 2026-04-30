@@ -63,7 +63,7 @@ export default function Home() {
           style={styles.loginBtn}
           onPress={() => router.push("/login")}
         >
-          <Text style={styles.logbtnText}>Login</Text>
+          <Text style={styles.logbtnText}>Log in</Text>
         </TouchableOpacity>
 
         {/* Register Button */}
@@ -71,7 +71,7 @@ export default function Home() {
           style={styles.registerBtn}
           onPress={() => router.push("/register")}
         >
-          <Text style={styles.regbtnText}>Sign Up</Text>
+          <Text style={styles.regbtnText}>Sign up</Text>
         </TouchableOpacity>
       </View>
 
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
 
   topSection: {
     backgroundColor: "#011C3A",
-    marginTop: 0,
     marginBottom: 30,
+    justifyContent:"flex-start",
     alignItems: "center",
     padding: 20,
     borderBottomEndRadius: 20,
@@ -96,11 +96,12 @@ const styles = StyleSheet.create({
   },
 
   bottomSection: {
-    flex: 1,
+    // flex: 1,
     padding: 10,
     justifyContent: "flex-end",
     marginBottom: -20,
     alignItems: "center",
+
   },
 
   logo: {
@@ -160,6 +161,7 @@ const styles = StyleSheet.create({
 gridContainer: {
   flex: 1,
   paddingHorizontal: 15,
+  paddingVertical:10
 },
 
 sectionTitle: {

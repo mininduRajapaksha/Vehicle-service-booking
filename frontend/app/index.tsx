@@ -15,7 +15,7 @@ export default function Index() {
     const role = await AsyncStorage.getItem("role");
 
     if (!token) {
-      router.replace("/(publicTabs)");   // ✅ THIS IS THE FIX
+      router.replace("/(publicTabs)");
     } else if (role === "admin") {
       router.replace("/admin");
     } else {

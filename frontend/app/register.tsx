@@ -77,94 +77,148 @@ export default function Register() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+      <Text style={styles.title}>Create Account</Text>
+      <View style={styles.form}>
+        <View style={styles.row}>
+          <View style={styles.halfInput}>
+          <TextInput
+            placeholder="First Name"
+            value={firstName}
+            onChangeText={(text) => {
+              setFirstName(text);
+              validate();
+            }}
+            style={styles.input}
+          />
+          {errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
+          </View>
+          <View style={styles.halfInput}>
+          <TextInput
+            placeholder="Last Name"
+            value={lastName}
+            onChangeText={(text) => {
+              setLastName(text);
+              validate();
+            }}
+            style={styles.halfInputLast}
+          />
+          {errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
+          </View>
+        </View>
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+            validate();
+          }}
+          style={styles.input}
+        />
+        {errors.email && <Text style={styles.error}>{errors.email}</Text>}
 
-      <TextInput
-        placeholder="First Name"
-        value={firstName}
-        onChangeText={(text) => {
-          setFirstName(text);
-          validate();
-        }}
-        style={styles.input}
-      />
-      {errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
+        <TextInput
+          placeholder="Phone"
+          value={telPhone}
+          onChangeText={(text) => {
+            setTelPhone(text);
+            validate();
+          }}
+          keyboardType="numeric"
+          style={styles.input}
+        />
+        {errors.telPhone && <Text style={styles.error}>{errors.telPhone}</Text>}
 
-      <TextInput
-        placeholder="Last Name"
-        value={lastName}
-        onChangeText={(text) => {
-          setLastName(text);
-          validate();
-        }}
-        style={styles.input}
-      />
-      {errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+            validate();
+          }}
+          secureTextEntry
+          style={styles.input}
+        />
+        {errors.password && <Text style={styles.error}>{errors.password}</Text>}
 
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={(text) => {
-          setEmail(text);
-          validate();
-        }}
-        style={styles.input}
-      />
-      {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+        <TextInput
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={(text) => {
+            setConfirmPassword(text);
+            validate();
+          }}
+          secureTextEntry
+          style={styles.input}
+        />
+        {errors.confirmPassword && <Text style={styles.error}>{errors.confirmPassword}</Text>}
 
-      <TextInput
-        placeholder="Phone"
-        value={telPhone}
-        onChangeText={(text) => {
-          setTelPhone(text);
-          validate();
-        }}
-        keyboardType="numeric"
-        style={styles.input}
-      />
-      {errors.telPhone && <Text style={styles.error}>{errors.telPhone}</Text>}
-
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={(text) => {
-          setPassword(text);
-          validate();
-        }}
-        secureTextEntry
-        style={styles.input}
-      />
-      {errors.password && <Text style={styles.error}>{errors.password}</Text>}
-
-      <TextInput
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChangeText={(text) => {
-          setConfirmPassword(text);
-          validate();
-        }}
-        secureTextEntry
-        style={styles.input}
-      />
-      {errors.confirmPassword && <Text style={styles.error}>{errors.confirmPassword}</Text>}
-
-      <Button title="Sign Up" onPress={handleRegister} />
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+        <Text style={styles.btnText}>Sign up</Text>
+      </TouchableOpacity>
+      </View>
 
       <TouchableOpacity onPress={() => router.push("/login")}>
-          <Text>Already have an account? Login</Text>
+          <Text style={styles.link}>Already have an account? Login</Text>
         </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: "center" },
-  title: { fontSize: 24, marginBottom: 20, textAlign: "center" },
-  input: {
+  container: { flex: 1,
+    padding: 20,
+    justifyContent: "center"
+  },
+  title: { 
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: "center"
+  },
+  form:{
+    padding:1
+  },
+  row:{
+    flexDirection:"row",
+    justifyContent:"space-between"
+  },
+  halfInput:{
+    flex:1,
+    marginRight: 10,
+  },
+  halfInputLast:{
+    backgroundColor: "#f5f5f5",
+    marginRight:-10,
+    // flex:1,
     borderWidth: 1,
-    padding: 10,
-    marginBottom: 5,
-    borderRadius: 5
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  input: {
+    backgroundColor: "#f5f5f5",
+    borderWidth: 1,
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  button:{
+    backgroundColor: "#2196F3",
+    padding: 12,
+    borderRadius: 15,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  btnText:{
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  link: {
+    textAlign: "left",
+    marginTop: 20,
+    marginLeft:5,
+    color: "#2196F3",
+    fontWeight: "600",
   },
   error: {
     color: "red",

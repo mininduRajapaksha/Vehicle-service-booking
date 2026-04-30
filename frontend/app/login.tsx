@@ -42,6 +42,9 @@ export default function Login() {
         await AsyncStorage.setItem("token", data.token);
         await AsyncStorage.setItem("role", data.role);
 
+        if (data.user) {await AsyncStorage.setItem("user", JSON.stringify(data.user));
+  }
+
         Alert.alert("Success", "Login successful");
 
         // Navigate based on role
@@ -65,7 +68,7 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Log in</Text>
 
       {/* Email */}
       <TextInput
@@ -94,13 +97,13 @@ export default function Login() {
         {loading ? (
           <ActivityIndicator color="#fff" />
         ) : (
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Log in</Text>
         )}
       </TouchableOpacity>
 
       {/* Register Link */}
       <TouchableOpacity onPress={() => router.push("/register")}>        
-        <Text style={[styles.link, { color: "blue" }]}>
+        <Text style={styles.link}>
           Don't have an account? Register
         </Text>
       </TouchableOpacity>
@@ -130,8 +133,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#4CAF50",
-    padding: 15,
-    borderRadius: 8,
+    padding: 12,
+    borderRadius: 15,
     alignItems: "center",
   },
   buttonText: {
@@ -141,7 +144,8 @@ const styles = StyleSheet.create({
   },
   link: {
     marginTop: 20,
-    textAlign: "center",
-    color: "#555",
+    marginLeft:5,
+    textAlign: 'left',
+    color: "#2196F3",
   },
 });
