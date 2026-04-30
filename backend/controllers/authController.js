@@ -76,13 +76,13 @@ export const login = async (req, res) => {
 // update user
 export const updateProfile = async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.userId.id;
 
-        const { firstName, lastName, telPhone } = req.body;
+        const { firstName, lastName, telPhone,email } = req.body;
 
         const updatedUser = await User.findByIdAndUpdate(
             userId,
-            { firstName, lastName, telPhone },
+            { firstName, lastName, telPhone,email },
             { new: true }
         );
 
@@ -91,8 +91,8 @@ export const updateProfile = async (req, res) => {
             user: {
                 firstName: updatedUser.firstName,
                 lastName: updatedUser.lastName,
-                email: updatedUser.email,
                 telPhone: updatedUser.telPhone,
+                email:updatedUser.email,
                 role: updatedUser.role
             }
         });

@@ -17,6 +17,7 @@ export default function EditProfile() {
     firstName: "",
     lastName: "",
     telPhone: "",
+    email:""
   });
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function EditProfile() {
         firstName: parsed.firstName,
         lastName: parsed.lastName,
         telPhone: parsed.telPhone,
+        email:parsed.email
       });
     }
   };
@@ -92,6 +94,15 @@ export default function EditProfile() {
         value={form.telPhone}
         onChangeText={(text) =>
           setForm({ ...form, telPhone: text })
+        }
+        style={styles.input}
+      />
+
+      <TextInput
+        placeholder="Email"
+        value={form.email}
+        onChangeText={(text) =>
+          setForm({ ...form, email: text })
         }
         style={styles.input}
       />
