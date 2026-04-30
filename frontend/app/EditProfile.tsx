@@ -58,7 +58,7 @@ export default function EditProfile() {
 
         Alert.alert("Success", "Profile updated");
 
-        router.back();
+        router.replace("/tabs/profile");
       } else {
         Alert.alert("Error", data.message);
       }
