@@ -1,12 +1,13 @@
 import express from "express";
 const router = express.Router();
 
-import { register, login } from "../controllers/authController.js";
+import { register, login, updateProfile } from "../controllers/authController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 //public routes
 router.post("/register", register);
 router.post("/login", login);
+router.put("/update",protect, updateProfile)
 
 //protected route example
 router.get("/profile", protect, (req, res) => {
