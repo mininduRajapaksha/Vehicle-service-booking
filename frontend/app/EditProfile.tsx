@@ -107,7 +107,7 @@ export default function EditProfile() {
     try {
       const token = await AsyncStorage.getItem("token");
 
-      const res = await fetch("http://192.168.1.3:5000/auth/update", {
+      const res = await fetch("https://vehicle-service-booking-dpzu.onrender.com/auth/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +123,13 @@ export default function EditProfile() {
 
         Alert.alert("Success", "Profile updated");
 
-        router.replace("/admin/profile");
+        const role = await AsyncStorage.getItem("role");
+
+          if (role === "admin") {
+            router.replace("/admin/profile");
+          } else {
+            router.replace("/tabs/profile");
+          }
       } else {
         Alert.alert("Error", data.message);
       }

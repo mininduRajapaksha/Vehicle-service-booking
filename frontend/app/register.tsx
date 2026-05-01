@@ -86,7 +86,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch("http://192.168.1.3:5000/auth/register", {
+      const res = await fetch("https://vehicle-service-booking-dpzu.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

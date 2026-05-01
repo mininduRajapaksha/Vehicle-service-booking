@@ -60,7 +60,7 @@ const handleDeleteAccount = () => {
             const token = await AsyncStorage.getItem("token");
 
             const res = await fetch(
-              "http://192.168.1.3:5000/auth/delete",
+              "https://vehicle-service-booking-dpzu.onrender.com/auth/delete",
               {
                 method: "DELETE",
                 headers: {
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffebee",   // light red
+    backgroundColor: "#ffebee",
     borderColor: "#c62828",
     borderWidth: 1.5,
     padding: 15,

@@ -60,7 +60,7 @@ const handleDeleteAccount = () => {
             const token = await AsyncStorage.getItem("token");
 
             const res = await fetch(
-              "http://192.168.1.3:5000/auth/delete",
+              "https://vehicle-service-booking-dpzu.onrender.com/auth/delete",
               {
                 method: "DELETE",
                 headers: {

@@ -31,7 +31,7 @@ export default function ServiceDetails() {
     <ScrollView style={styles.container}>
       {service.Image && (
         <Image
-          source={{ uri: `http://192.168.1.3:5000/${service.Image}` }}
+          source={{ uri: `https://vehicle-service-booking-dpzu.onrender.com/${service.Image}` }}
           style={styles.image}
         />
       )}
