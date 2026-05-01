@@ -40,7 +40,7 @@ export default function EditProfile() {
     }
   };
 
-  // 🔍 Real-time validation
+  // Real-time validation
   const validateField = (name: string, value: string) => {
     let error = "";
 
@@ -68,7 +68,7 @@ export default function EditProfile() {
     }));
   };
 
-  // ✅ FULL validation before submit
+  //validation before submit
   const validateAll = () => {
     let newErrors: any = {};
 
@@ -98,7 +98,7 @@ export default function EditProfile() {
   };
 
   const handleUpdate = async () => {
-    // ✅ Validate everything before submit
+    //Validate before submit
     if (!validateAll()) {
       Alert.alert("Error", "Please fix validation errors");
       return;
@@ -191,7 +191,7 @@ export default function EditProfile() {
           value={form.telPhone}
           keyboardType="numeric"
           onChangeText={(text) => {
-            const cleaned = text.replace(/[^0-9]/g, ""); // ✅ only numbers
+            const cleaned = text.replace(/[^0-9]/g, "");
             setForm({ ...form, telPhone: cleaned });
             validateField("telPhone", cleaned);
           }}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
     justifyContent:"center",
     color: "#f6f6f6",
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   backBtn: {
     position: "absolute",
     left: 15,
-    top: 50,   // adjust if needed (depends on device)
+    top: 50,
     zIndex: 10,
   },
 
@@ -278,8 +278,8 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     fontWeight: "600",
-    marginBottom: 6,
     marginTop: 12,
+    marginBottom: 6,
     color: "#555",
   },
 
@@ -294,10 +294,12 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#f5f5f5",
-    padding:15,
-    borderRadius: 10,
-    marginBottom: 5,
+    backgroundColor: "#fafafa",
+    padding: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    // borderColor: "#eee",
+    borderColor: "#ccc",
   },
 
   inputError: {
@@ -312,13 +314,12 @@ const styles = StyleSheet.create({
   },
 
 button: {
-  backgroundColor: "#2196F3",
-  padding: 15,
-  borderRadius: 14,
-  alignItems: "center",
-  marginTop: 25,
-  marginHorizontal: 12,
-  elevation: 2,
+    backgroundColor: "#011C3A",
+    padding: 15,
+    borderRadius: 15,
+    alignItems: "center",
+    marginTop: 25,
+    marginHorizontal:10
 },
 
   buttonText: {

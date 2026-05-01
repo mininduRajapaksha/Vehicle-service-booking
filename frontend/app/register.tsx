@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -7,6 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from "react-native";
 
 export default function Register() {
@@ -21,17 +23,11 @@ export default function Register() {
 
   const [errors, setErrors] = useState<any>({});
 
-  // 🔍 Real-time validation (single field)
   const validateField = (name: string, value: string) => {
     let error = "";
 
-    if (name === "firstName" && !value.trim()) {
-      error = "First name required";
-    }
-
-    if (name === "lastName" && !value.trim()) {
-      error = "Last name required";
-    }
+    if (name === "firstName" && !value.trim()) error = "First name required";
+    if (name === "lastName" && !value.trim()) error = "Last name required";
 
     if (name === "email") {
       if (!value) error = "Email required";
@@ -53,13 +49,9 @@ export default function Register() {
       else if (value !== form.password) error = "Passwords do not match";
     }
 
-    setErrors((prev: any) => ({
-      ...prev,
-      [name]: error,
-    }));
+    setErrors((prev: any) => ({ ...prev, [name]: error }));
   };
 
-  // ✅ Full validation on submit
   const validateAll = () => {
     let newErrors: any = {};
 
@@ -84,7 +76,6 @@ export default function Register() {
       newErrors.confirmPassword = "Passwords do not match";
 
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
@@ -104,185 +95,236 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        Alert.alert("Success", "Registered successfully");
+        Alert.alert("Success", "Account created");
         router.replace("/login");
       } else {
         Alert.alert("Error", data.message);
       }
-    } catch (err) {
+    } catch {
       Alert.alert("Error", "Server error");
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Create Account</Text>
-
-      <View style={styles.form}>
-        {/* First + Last Name */}
-        <View style={styles.row}>
-          <View style={styles.halfInput}>
-            <TextInput
-              placeholder="First Name"
-              value={form.firstName}
-              onChangeText={(text) => {
-                setForm({ ...form, firstName: text });
-                validateField("firstName", text);
-              }}
-              style={[
-                styles.input,
-                errors.firstName && styles.inputError,
-              ]}
-            />
-            {errors.firstName && (
-              <Text style={styles.error}>{errors.firstName}</Text>
-            )}
-          </View>
-
-          <View style={styles.halfInput}>
-            <TextInput
-              placeholder="Last Name"
-              value={form.lastName}
-              onChangeText={(text) => {
-                setForm({ ...form, lastName: text });
-                validateField("lastName", text);
-              }}
-              style={[
-                styles.input,
-                errors.lastName && styles.inputError,
-              ]}
-            />
-            {errors.lastName && (
-              <Text style={styles.error}>{errors.lastName}</Text>
-            )}
-          </View>
-        </View>
-
-        {/* Email */}
-        <TextInput
-          placeholder="Email"
-          value={form.email}
-          onChangeText={(text) => {
-            setForm({ ...form, email: text });
-            validateField("email", text);
-          }}
-          style={[styles.input, errors.email && styles.inputError]}
-        />
-        {errors.email && <Text style={styles.error}>{errors.email}</Text>}
-
-        {/* Phone */}
-        <TextInput
-          placeholder="Phone"
-          keyboardType="numeric"
-          value={form.telPhone}
-          onChangeText={(text) => {
-            const cleaned = text.replace(/[^0-9]/g, "");
-            setForm({ ...form, telPhone: cleaned });
-            validateField("telPhone", cleaned);
-          }}
-          style={[styles.input, errors.telPhone && styles.inputError]}
-        />
-        {errors.telPhone && (
-          <Text style={styles.error}>{errors.telPhone}</Text>
-        )}
-
-        {/* Password */}
-        <TextInput
-          placeholder="Password"
-          secureTextEntry
-          value={form.password}
-          onChangeText={(text) => {
-            setForm({ ...form, password: text });
-            validateField("password", text);
-          }}
-          style={[styles.input, errors.password && styles.inputError]}
-        />
-        {errors.password && (
-          <Text style={styles.error}>{errors.password}</Text>
-        )}
-
-        {/* Confirm Password */}
-        <TextInput
-          placeholder="Confirm Password"
-          secureTextEntry
-          value={form.confirmPassword}
-          onChangeText={(text) => {
-            setForm({ ...form, confirmPassword: text });
-            validateField("confirmPassword", text);
-          }}
-          style={[styles.input, errors.confirmPassword && styles.inputError]}
-        />
-        {errors.confirmPassword && (
-          <Text style={styles.error}>{errors.confirmPassword}</Text>
-        )}
-
-        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-          <Text style={styles.btnText}>Sign up</Text>
+      {/*Header */}
+      <View style={styles.topSection}>
+        <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
+
+        <Text style={styles.title}>Create Account</Text>
+        <Text style={styles.subtitle}>Join us today</Text>
       </View>
 
-      <TouchableOpacity onPress={() => router.push("/login")}>
-        <Text style={styles.link}>
-          Already have an account? Login
-        </Text>
-      </TouchableOpacity>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.form}>
+          <Text style={styles.formTitle}>Sign up</Text>
+          <View style={styles.row}>
+            <View style={styles.halfInput}>
+              <Text style={styles.label}>First Name</Text>
+              <TextInput
+                value={form.firstName}
+                onChangeText={(t) => {
+                  setForm({ ...form, firstName: t });
+                  validateField("firstName", t);
+                }}
+                style={[styles.input, errors.firstName && styles.inputError]}
+              />
+              {errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
+            </View>
+
+            <View style={styles.halfInput}>
+              <Text style={styles.label}>Last Name</Text>
+              <TextInput
+                value={form.lastName}
+                onChangeText={(t) => {
+                  setForm({ ...form, lastName: t });
+                  validateField("lastName", t);
+                }}
+                style={[styles.input, errors.lastName && styles.inputError]}
+              />
+              {errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
+            </View>
+          </View>
+
+          {/* Email */}
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            placeholder="example@test.com"
+            placeholderTextColor="#999"
+            value={form.email}
+            onChangeText={(t) => {
+              setForm({ ...form, email: t });
+              validateField("email", t);
+            }}
+            style={[styles.input, errors.email && styles.inputError]}
+          />
+          {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+
+          {/* Phone */}
+          <Text style={styles.label}>Phone</Text>
+          <TextInput
+            placeholder="07XXXXXXXX"
+            placeholderTextColor="#999"
+            value={form.telPhone}
+            keyboardType="numeric"
+            onChangeText={(t) => {
+              const clean = t.replace(/[^0-9]/g, "");
+              setForm({ ...form, telPhone: clean });
+              validateField("telPhone", clean);
+            }}
+            style={[styles.input, errors.telPhone && styles.inputError]}
+          />
+          {errors.telPhone && <Text style={styles.error}>{errors.telPhone}</Text>}
+
+          {/* Password */}
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            placeholder="Minimum 6 characters"
+            placeholderTextColor="#999"
+            secureTextEntry
+            value={form.password}
+            onChangeText={(t) => {
+              setForm({ ...form, password: t });
+              validateField("password", t);
+            }}
+            style={[styles.input, errors.password && styles.inputError]}
+          />
+          {errors.password && <Text style={styles.error}>{errors.password}</Text>}
+
+          {/* Confirm Password */}
+          <Text style={styles.label}>Confirm Password</Text>
+          <TextInput
+            secureTextEntry
+            value={form.confirmPassword}
+            onChangeText={(t) => {
+              setForm({ ...form, confirmPassword: t });
+              validateField("confirmPassword", t);
+            }}
+            style={[styles.input, errors.confirmPassword && styles.inputError]}
+          />
+          {errors.confirmPassword && <Text style={styles.error}>{errors.confirmPassword}</Text>}
+
+          {/* Button */}
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
+            <Text style={styles.btnText}>Sign Up</Text>
+          </TouchableOpacity>
+
+          {/* Link */}
+          <TouchableOpacity onPress={() => router.push("/login")}>
+            <Text style={styles.link}>
+              Already have an account? Sign in
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  form: {
-    padding: 1,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  halfInput: {
-    flex: 1,
-    marginRight: 10,
-  },
-  input: {
-    backgroundColor: "#f5f5f5",
-    borderWidth: 1,
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  button: {
-    backgroundColor: "#2196F3",
-    padding: 12,
-    borderRadius: 15,
+  container: { flex: 1, backgroundColor: "#f5f7fa" },
+
+  topSection: {
+    backgroundColor: "#011C3A",
+    marginBottom: 30,
+    height: 150,
+    justifyContent:"center",
     alignItems: "center",
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+  },
+
+  backBtn: {
+    position: "absolute",
+    left: 15,
+    top: 50,
+  },
+
+  title: {
+    fontSize: 26,
+    fontWeight: "bold",
+    justifyContent:"center",
+    color: "#f6f6f6",
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: "#cfd8dc",
     marginTop: 10,
   },
+
+  form: {
+    backgroundColor: "#fff",
+    marginHorizontal: 10,
+    borderRadius: 16,
+    padding: 20,
+    elevation: 4,
+  },
+
+  formTitle:{
+    color:"#011C3A",
+    fontWeight:"bold",
+    fontSize:26,
+    marginBottom:20,
+    marginLeft:5
+  },
+
+  label: {
+    fontSize: 13,
+    fontWeight: "600",
+    marginTop: 12,
+    marginBottom: 6,
+    color: "#555",
+  },
+
+  input: {
+    backgroundColor: "#fafafa",
+    padding: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+  },
+
+  inputError: {
+    borderColor: "#e53935",
+  },
+
+  error: {
+    color: "#e53935",
+    fontSize: 12,
+    marginTop: 4,
+  },
+
+  row: {
+    flexDirection: "row",
+    gap: 10,
+  },
+
+  halfInput: {
+    flex: 1,
+  },
+
+  button: {
+    backgroundColor: "#011C3A",
+    padding: 15,
+    borderRadius: 15,
+    alignItems: "center",
+    marginTop: 25,
+  },
+
   btnText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
   },
+
   link: {
-    textAlign: "left",
+    textAlign: "center",
     marginTop: 20,
-    marginLeft: 5,
     color: "#2196F3",
     fontWeight: "600",
-  },
-  error: {
-    color: "red",
-    marginBottom: 10,
-  },
-  inputError: {
-    borderColor: "red",
   },
 });

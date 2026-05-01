@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Login() {
   const router = useRouter();
@@ -68,7 +69,18 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Log in</Text>
+      <View style={styles.topSection}>
+          <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
+            <Ionicons name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
+        <Text style={styles.title}>Welcome Back</Text>
+        <Text style={styles.subtitle}>
+          Sign in to continue
+        </Text>
+      </View>
+
+    <View style={styles.form}>
+      <Text style={styles.formTitle}>Sign in</Text>
 
       {/* Email */}
       <TextInput
@@ -97,7 +109,7 @@ export default function Login() {
         {loading ? (
           <ActivityIndicator color="#fff" />
         ) : (
-          <Text style={styles.buttonText}>Log in</Text>
+          <Text style={styles.buttonText}>Sign in</Text>
         )}
       </TouchableOpacity>
 
@@ -107,6 +119,7 @@ export default function Login() {
           Don't have an account? Sign up
         </Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -114,26 +127,66 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f7fa",
   },
+
+  topSection: {
+    backgroundColor: "#011C3A",
+    marginBottom: 30,
+    height: 150,
+    justifyContent:"center",
+    alignItems: "center",
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+  },
+
+  backBtn: {
+    position: "absolute",
+    left: 15,
+    top: 50,
+    zIndex: 10,
+  },
+
   title: {
-    fontSize: 28,
-    marginBottom: 25,
-    textAlign: "center",
+    fontSize: 26,
     fontWeight: "bold",
+    justifyContent:"center",
+    color: "#f6f6f6",
   },
+  subtitle: {
+    fontSize: 16,
+    color: "#cfd8dc",
+    marginTop: 10,
+  },
+  form:{
+    backgroundColor: "#fff",
+    padding: 20,
+    marginHorizontal: 10,
+    borderRadius: 16,
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+  },
+  formTitle:{
+    color:"#011C3A",
+    fontWeight:"bold",
+    fontSize:26,
+    marginBottom:20,
+    marginLeft:5
+  },
+
   input: {
     borderWidth: 1,
     padding: 12,
     marginBottom: 15,
-    borderRadius: 8,
+    borderRadius: 12,
     borderColor: "#ccc",
   },
   button: {
-    backgroundColor: "#4CAF50",
-    padding: 12,
+    // backgroundColor: "#4CAF50",
+    backgroundColor:"#011C3A",
+    padding: 15,
     borderRadius: 15,
     alignItems: "center",
   },
