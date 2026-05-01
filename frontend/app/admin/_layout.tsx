@@ -13,13 +13,13 @@ export default function TabLayout() {
             <Ionicons name="home" color={color} size={size} />
           )
         }} 
-      />
-      <Tabs.Screen 
-        name="Services" 
+        />
+        <Tabs.Screen 
+        name="AddServices" 
         options={{ 
-          title: "Services",
+          title: "Add Service",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
+            <Ionicons name="add" color={color} size={size} />
           )
         }} 
       />

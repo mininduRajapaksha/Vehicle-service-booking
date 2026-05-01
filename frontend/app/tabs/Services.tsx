@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, ScrollView } from "react-native";
+import { View, Text, FlatList, Image, ScrollView, StyleSheet} from "react-native";
 import { useEffect, useState } from "react";
 import API from "../Services/api";
 
@@ -12,10 +12,11 @@ export default function ServicesScreen() {
   }, []);
 
   return (
-    <View style={{ padding: 20 }}>
-      {/* <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 15 }}>
-        Services
-      </Text> */}
+    <View style={styles.container}>
+
+      <View style={styles.topSection}>
+        <Text style={styles.title}>Services</Text>
+      </View>
 
       <FlatList
         data={services}
@@ -62,3 +63,26 @@ export default function ServicesScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    container: {
+    flex: 1,
+    backgroundColor: "#f5f7fa",
+  },
+    topSection: {
+    backgroundColor: "#011C3A",
+    marginBottom: 30,
+    height: 200,
+    justifyContent:"center",
+    alignItems: "center",
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+  },
+
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    justifyContent:"center",
+    color: "#f6f6f6",
+  },
+});

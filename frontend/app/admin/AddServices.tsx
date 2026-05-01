@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, TextInput, View, Button, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { Alert, TextInput, View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import API from "../Services/api";
@@ -82,10 +82,17 @@ export default function AddServices() {
   };
 
   return (
+    <View>
+
+      <View style={styles.topSection}>
+        <Text style={styles.title}>Add Services</Text>
+
+        <Text style={styles.subtitle}>
+            Update your information
+        </Text>
+      </View>
+
     <ScrollView style={{ padding: 20, backgroundColor: "#fff" }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>
-        Add Services
-      </Text>
 
       <TextInput
         placeholder="Service Name *"
@@ -193,10 +200,33 @@ export default function AddServices() {
           Add Service
         </Text>
       </TouchableOpacity>
-
-      <Text style={{ color: "#999", fontSize: 12, textAlign: "center", marginTop: 10 }}>
-        * Required fields
-      </Text>
     </ScrollView>
+    </View>
   );
 }
+
+const styles =StyleSheet.create({
+  topSection: {
+    backgroundColor: "#011C3A",
+    marginBottom: 30,
+    height: 200,
+    justifyContent:"center",
+    alignItems: "center",
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+  },
+
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    justifyContent:"center",
+    color: "#f6f6f6",
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: "#f6f6f6",
+    textAlign: "center",
+    marginTop:10
+  },
+})

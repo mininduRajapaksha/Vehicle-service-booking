@@ -104,7 +104,7 @@ export default function Login() {
       {/* Register Link */}
       <TouchableOpacity onPress={() => router.push("/register")}>        
         <Text style={styles.link}>
-          Don't have an account? Register
+          Don't have an account? Sign up
         </Text>
       </TouchableOpacity>
     </View>
@@ -147,5 +147,6 @@ const styles = StyleSheet.create({
     marginLeft:5,
     textAlign: 'left',
     color: "#2196F3",
+    fontWeight: "600",
   },
 });

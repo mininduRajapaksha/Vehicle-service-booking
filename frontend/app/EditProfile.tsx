@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function EditProfile() {
   const router = useRouter();
@@ -122,7 +123,7 @@ export default function EditProfile() {
 
         Alert.alert("Success", "Profile updated");
 
-        router.replace("/tabs/profile");
+        router.replace("/admin/profile");
       } else {
         Alert.alert("Error", data.message);
       }
@@ -133,73 +134,91 @@ export default function EditProfile() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Edit Profile</Text>
 
-      {/* 🧑 First + Last Name */}
-      <View style={styles.row}>
-        <View style={styles.halfInput}>
-          <Text style={styles.label}>First Name</Text>
-          <TextInput
-            value={form.firstName}
-            onChangeText={(text) => {
-              setForm({ ...form, firstName: text });
-              validateField("firstName", text);
-            }}
-            style={[styles.input, errors.firstName && styles.inputError]}
-          />
-          {errors.firstName && (
-            <Text style={styles.error}>{errors.firstName}</Text>
-          )}
+      <View style={styles.topSection}>
+
+        <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+
+        <Text style={styles.title}>Edit Profile</Text>
+
+        <Text style={styles.subtitle}>
+          Update your information
+        </Text>
+
+      </View>
+      
+      <View style={styles.form}>
+
+        {/* First Name */}
+        <View style={styles.row}>
+          <View style={styles.halfInput}>
+            <Text style={styles.label}>First Name</Text>
+            <TextInput
+              value={form.firstName}
+              onChangeText={(text) => {
+                setForm({ ...form, firstName: text });
+                validateField("firstName", text);
+              }}
+              style={[styles.input, errors.firstName && styles.inputError]}
+            />
+            {errors.firstName && (
+              <Text style={styles.error}>{errors.firstName}</Text>
+            )}
+          </View>
+
+          {/*Last Name*/}
+          <View style={styles.halfInput}>
+            <Text style={styles.label}>Last Name</Text>
+            <TextInput
+              value={form.lastName}
+              onChangeText={(text) => {
+                setForm({ ...form, lastName: text });
+                validateField("lastName", text);
+              }}
+              style={[styles.input, errors.lastName && styles.inputError]}
+            />
+            {errors.lastName && (
+              <Text style={styles.error}>{errors.lastName}</Text>
+            )}
+          </View>
         </View>
 
-        <View style={styles.halfInput}>
-          <Text style={styles.label}>Last Name</Text>
-          <TextInput
-            value={form.lastName}
-            onChangeText={(text) => {
-              setForm({ ...form, lastName: text });
-              validateField("lastName", text);
-            }}
-            style={[styles.input, errors.lastName && styles.inputError]}
-          />
-          {errors.lastName && (
-            <Text style={styles.error}>{errors.lastName}</Text>
-          )}
-        </View>
+        {/* Phone */}
+        <Text style={styles.label}>Phone</Text>
+        <TextInput
+          value={form.telPhone}
+          keyboardType="numeric"
+          onChangeText={(text) => {
+            const cleaned = text.replace(/[^0-9]/g, ""); // ✅ only numbers
+            setForm({ ...form, telPhone: cleaned });
+            validateField("telPhone", cleaned);
+          }}
+          style={[styles.input, errors.telPhone && styles.inputError]}
+        />
+        {errors.telPhone && (
+          <Text style={styles.error}>{errors.telPhone}</Text>
+        )}
+
+        {/*Email */}
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          value={form.email}
+          autoCapitalize="none"
+          onChangeText={(text) => {
+            setForm({ ...form, email: text });
+            validateField("email", text);
+          }}
+          style={[styles.input, errors.email && styles.inputError]}
+        />
+        {errors.email && (
+          <Text style={styles.error}>{errors.email}</Text>
+        )}
+
       </View>
 
-      {/* 📱 Phone */}
-      <Text style={styles.label}>Phone</Text>
-      <TextInput
-        value={form.telPhone}
-        keyboardType="numeric"
-        onChangeText={(text) => {
-          const cleaned = text.replace(/[^0-9]/g, ""); // ✅ only numbers
-          setForm({ ...form, telPhone: cleaned });
-          validateField("telPhone", cleaned);
-        }}
-        style={[styles.input, errors.telPhone && styles.inputError]}
-      />
-      {errors.telPhone && (
-        <Text style={styles.error}>{errors.telPhone}</Text>
-      )}
-
-      {/* 📧 Email */}
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        value={form.email}
-        autoCapitalize="none"
-        onChangeText={(text) => {
-          setForm({ ...form, email: text });
-          validateField("email", text);
-        }}
-        style={[styles.input, errors.email && styles.inputError]}
-      />
-      {errors.email && (
-        <Text style={styles.error}>{errors.email}</Text>
-      )}
-
-      {/* 🔘 Button */}
+      {/*Button */}
       <TouchableOpacity style={styles.button} onPress={handleUpdate}>
         <Text style={styles.buttonText}>Update</Text>
       </TouchableOpacity>
@@ -210,23 +229,58 @@ export default function EditProfile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-    justifyContent: "center",
+    backgroundColor: "#f5f7fa",
+  },
+
+  topSection: {
+    backgroundColor: "#011C3A",
+    marginBottom: 30,
+    height: 150,
+    justifyContent:"center",
+    alignItems: "center",
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
   },
 
   title: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 20,
+    justifyContent:"center",
+    color: "#f6f6f6",
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: "#f6f6f6",
+    textAlign: "center",
+    marginTop:10,
+    // marginBottom: 5,
+  },
+
+  backBtn: {
+    position: "absolute",
+    left: 15,
+    top: 50,   // adjust if needed (depends on device)
+    zIndex: 10,
+  },
+
+  form:{
+    backgroundColor: "#fff",
+    padding: 20,
+    marginHorizontal: 12,
+    borderRadius: 16,
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
   },
 
   label: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "600",
-    marginBottom: 5,
-    marginTop: 10,
-    color: "#333",
+    marginBottom: 6,
+    marginTop: 12,
+    color: "#555",
   },
 
   row: {
@@ -241,7 +295,7 @@ const styles = StyleSheet.create({
 
   input: {
     backgroundColor: "#f5f5f5",
-    padding: 15,
+    padding:15,
     borderRadius: 10,
     marginBottom: 5,
   },
@@ -257,16 +311,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 
-  button: {
-    backgroundColor: "#2196F3",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 20,
-  },
+button: {
+  backgroundColor: "#2196F3",
+  padding: 15,
+  borderRadius: 14,
+  alignItems: "center",
+  marginTop: 25,
+  marginHorizontal: 12,
+  elevation: 2,
+},
 
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+    fontSize:16
   },
 });

@@ -28,7 +28,7 @@ export default function Home() {
         {/* image */}
         <Image
           source={require("../../assets/images/carHome.jpg")}
-          style={styles.logo}
+          style={styles.image}
         />
 
         {/* Title */}
@@ -104,12 +104,13 @@ const styles = StyleSheet.create({
 
   },
 
-  logo: {
+  image: {
     maxWidth: "100%",
     maxHeight: "100%",
     height: 120,
     marginTop: 50,
     marginBottom: 20,
+    resizeMode:"contain"
   },
 
   title: {
