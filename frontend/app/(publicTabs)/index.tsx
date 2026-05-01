@@ -63,7 +63,7 @@ export default function Home() {
           style={styles.loginBtn}
           onPress={() => router.push("/login")}
         >
-          <Text style={styles.logbtnText}>Log in</Text>
+          <Text style={styles.logbtnText}>Sign in</Text>
         </TouchableOpacity>
 
         {/* Register Button */}
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
     marginBottom: 10,
     color: "#f6f6f6",

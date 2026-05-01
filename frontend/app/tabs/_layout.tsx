@@ -1,10 +1,10 @@
 import { Tabs } from "expo-router";
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
+
       <Tabs.Screen 
         name="index" 
         options={{ 
@@ -14,8 +14,9 @@ export default function TabLayout() {
           )
         }} 
       />
+
       <Tabs.Screen 
-        name="Services" 
+        name="services/index"
         options={{ 
           title: "Services",
           tabBarIcon: ({ color, size }) => (
@@ -23,6 +24,7 @@ export default function TabLayout() {
           )
         }} 
       />
+
       <Tabs.Screen
         name="profile"
         options={{
@@ -32,6 +34,15 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      {/* Hide details */}
+      <Tabs.Screen
+        name="services/[serviceId]"
+        options={{
+          href: null,
+        }}
+      />
+
     </Tabs>
   );
 }
