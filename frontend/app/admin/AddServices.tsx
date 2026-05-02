@@ -12,6 +12,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import API from "../Services/api";
+import { router } from "expo-router";
 
 export default function AddServices() {
   const [serviceName, setServiceName] = useState("");
@@ -84,8 +85,8 @@ export default function AddServices() {
       if (image) {
         formData.append("image", {
           uri: image.uri,
-          name: `service_${Date.now()}.jpg`,
-          type: "image/jpeg",
+          name: image.fileName || `service_${Date.now()}.jpg`,
+          type: image.mimeType || "image/jpeg",
         } as any);
       }
 
@@ -94,6 +95,8 @@ export default function AddServices() {
       });
 
       Alert.alert("Success", "Service added successfully");
+      router.replace("/tabs/services")
+
 
       setServiceName("");
       setPrice("");
