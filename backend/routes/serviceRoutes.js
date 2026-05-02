@@ -51,7 +51,7 @@ router.route("/update/:id").put((req,res) =>{
 });
 
 //delete a service
-router.route("delete/:id").delete((req,res) =>{
+router.route("/delete/:id").delete((req,res) =>{
     Service.findByIdAndDelete(req.params.id)
     .then(() => res.json("Service Deleted"))
     .catch(err => res.status(400).json("Error: " + err));
