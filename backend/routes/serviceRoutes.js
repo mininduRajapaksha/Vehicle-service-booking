@@ -20,7 +20,7 @@ router.route("/add").post(upload.single("image"), (req, res) => {
 });
 
 //Get all services
-router.route("/").get((req,res) =>{
+router.route("/get").get((req,res) =>{
     Service.find()
     .then(services => res.json(services))
     .catch(err => res.status(400).json("Error: " + err));
