@@ -35,13 +35,17 @@ router.route("/:id").get((req,res) =>{
 })
 
 //update a service
-router.route("/update/:id").put((req,res) =>{
+router.route("/update/:id").put(upload.single("image"),(req,res) =>{
     Service.findById(req.params.id)
     .then(Service =>{
         Service.serviceName = req.body.serviceName;
         Service.description = req.body.description;
         Service.price = req.body.price;
         Service.duration = req.body.duration;
+
+        if (req.file) {
+            service.Image = req.file.path;
+        }
 
         Service.save()
         .then(()=>{res.json("Service Updated")
