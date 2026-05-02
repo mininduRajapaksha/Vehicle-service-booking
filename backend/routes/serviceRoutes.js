@@ -44,7 +44,7 @@ router.route("/update/:id").put(upload.single("image"),(req,res) =>{
         Service.duration = req.body.duration;
 
         if (req.file) {
-            Service.Image = req.file.path;
+            service.Image = req.file.path;
         }
 
         Service.save()
