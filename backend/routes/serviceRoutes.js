@@ -37,17 +37,17 @@ router.route("/:id").get((req,res) =>{
 //update a service
 router.route("/update/:id").put(upload.single("image"),(req,res) =>{
     Service.findById(req.params.id)
-    .then(Service =>{
-        Service.serviceName = req.body.serviceName;
-        Service.description = req.body.description;
-        Service.price = req.body.price;
-        Service.duration = req.body.duration;
+    .then(service =>{
+        service.serviceName = req.body.serviceName;
+        service.description = req.body.description;
+        service.price = req.body.price;
+        service.duration = req.body.duration;
 
         if (req.file) {
-            Service.Image = req.file.path;
+            service.Image = req.file.path;
         }
 
-        Service.save()
+        service.save()
         .then(()=>{res.json("Service Updated")
         }).catch(err => res.status(400).json("Error: " + err));
     })
