@@ -32,7 +32,7 @@ export default function Home() {
         />
 
         {/* Title */}
-        <Text style={styles.title}>Vehicle Service</Text>
+        <Text style={styles.title}>Auto Care</Text>
 
         {/* Subtitle */}
         <Text style={styles.subtitle}>
