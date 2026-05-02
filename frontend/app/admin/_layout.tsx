@@ -15,11 +15,11 @@ export default function TabLayout() {
         }} 
         />
         <Tabs.Screen 
-        name="AddServices" 
+        name="services" 
         options={{ 
-          title: "Add Service",
+          title: "Service",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="add" color={color} size={size} />
+            <Ionicons name="list" color={color} size={size} />
           )
         }} 
       />
@@ -30,6 +30,18 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="AddServices"
+        options={{
+          href:null
+        }}
+      />
+      <Tabs.Screen
+        name="EditService/[serviceId]"
+        options={{
+          href:null
         }}
       />
     </Tabs>
