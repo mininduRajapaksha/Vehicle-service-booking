@@ -55,7 +55,7 @@ export const login = async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        // ✅ RETURN USER DATA (IMPORTANT)
+        //return user data
         res.status(200).json({
             token,
             role: user.role,
