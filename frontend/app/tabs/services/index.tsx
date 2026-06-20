@@ -33,7 +33,7 @@ export default function ServicesScreen() {
       {item.Image && (
         <Image
           source={{
-            uri: `https://vehicle-service-booking-dpzu.onrender.com/${item.Image}`,
+            uri: item.Image
           }}
           style={styles.image}
         />
