@@ -5,18 +5,16 @@ import cloudinary from "../config/cloudinary.js";
 const storage = new CloudinaryStorage({
   cloudinary,
 
-  params: async (req, file) => ({
+  params: {
     folder: "vehicle-services",
 
-    allowed_formats: [
-      "jpg",
-      "jpeg",
-      "png",
-      "webp"
-    ],
+    format: async (req, file) => {
+      return "jpg";
+    },
 
-    public_id: `${Date.now()}`
-  }),
+    public_id: (req, file) =>
+      `service_${Date.now()}`
+  },
 });
 
 const upload = multer({
