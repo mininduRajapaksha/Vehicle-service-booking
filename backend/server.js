@@ -31,6 +31,15 @@ app.use("/services", serviceRoutes);
 app.use("/items", serviceItemRoutes);
 app.use("/uploads", express.static("uploads"));
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error("Error:", err.message);
+    if (err.name === "MulterError") {
+        return res.status(400).json({ error: "Upload error: " + err.message });
+    }
+    res.status(500).json({ error: err.message || "Internal server error" });
+});
+
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);
 });

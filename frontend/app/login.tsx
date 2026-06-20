@@ -28,7 +28,8 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const response = await fetch("https://vehicle-service-booking-dpzu.onrender.com/auth/login", {
+      const response = await fetch("http://192.168.1.3:5000/auth/login", {
+        
         method: "POST",
         headers: {
           "Content-Type": "application/json",
